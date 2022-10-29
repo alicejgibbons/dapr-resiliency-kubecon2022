@@ -1,0 +1,20 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: order-binding-nolock
+  namespace: dapr-resiliency
+spec:
+  type: bindings.azure.blobstorage
+  version: v1
+  metadata:
+  - name: accountName
+    value: customerorderstore
+  - name: accountKey
+    secretKeyRef:    
+      name: blob-key
+      key: blob-key
+  - name: containerName
+    value: orders-nolock
+scopes:
+  - customer-audit-service
+  - customer-loyalty-job-nolock

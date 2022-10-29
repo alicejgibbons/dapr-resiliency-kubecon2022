@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "CustomerAuditService": {
+      "commandName": "Project",
+      "applicationUrl": "http://localhost:6000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://*:6000",
+        "DAPR_HTTP_PORT": "6100",
+        "DAPR_GRPC_PORT": "6101"
+      }
+    }
+  }
+}

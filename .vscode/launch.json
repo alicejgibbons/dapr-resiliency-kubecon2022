@@ -1,0 +1,86 @@
+{
+    // Use IntelliSense to find out which attributes exist for C# debugging
+    // Use hover for the description of the existing attributes
+    // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug Customer Order Service",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "order-dapr-up",
+            "postDebugTask": "order-dapr-down",
+            "program": "${workspaceFolder}/CustomerOrderService/bin/Debug/net6.0/CustomerOrderService.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/CustomerOrderService",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://*:4000",
+                "DAPR_HTTP_PORT": "4100",
+                "DAPR_GRPC_PORT": "4101"
+            }
+        },
+        {
+            "name": "Debug Customer Audit Service",
+            "type": "coreclr",
+            "preLaunchTask": "audit-dapr-up",
+            "postDebugTask": "audit-dapr-down",
+            "request": "launch",
+            "program": "${workspaceFolder}/CustomerAuditService/bin/Debug/net6.0/CustomerAuditService.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/CustomerAuditService",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://*:6000",
+                "DAPR_HTTP_PORT": "6100",
+                "DAPR_GRPC_PORT": "6101"
+            }
+        },
+        {
+            "name": "Debug Customer Loyalty Job",
+            "type": "coreclr",
+            "preLaunchTask": "loyalty-dapr-up",
+            "postDebugTask": "loyalty-dapr-down",
+            "request": "launch",
+            "program": "${workspaceFolder}/CustomerLoyaltyJob/bin/Debug/net6.0/CustomerLoyaltyJob.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/CustomerLoyaltyJob",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://*:8000",
+                "DAPR_HTTP_PORT": "8100",
+                "DAPR_GRPC_PORT": "8101"
+            }
+        },
+        {
+            "name": "Debug Customer Loyalty Job (no lock)",
+            "type": "coreclr",
+            "preLaunchTask": "loyalty-dapr-up-nolock",
+            "postDebugTask": "loyalty-dapr-down-nolock",
+            "request": "launch",
+            "program": "${workspaceFolder}/CustomerLoyaltyJobNoLock/bin/Debug/net6.0/CustomerLoyaltyJobNoLock.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/CustomerLoyaltyJobNoLock",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://*:9000",
+                "DAPR_HTTP_PORT": "9100",
+                "DAPR_GRPC_PORT": "9101"
+            }
+        }
+    ],
+    "compounds": [
+        {
+          "name": "Debug Solution",
+          "configurations": [
+            "Debug Customer Audit Service",
+            "Debug Customer Loyalty Job",
+            "Debug Customer Order Service"
+          ]
+        }
+      ]
+}

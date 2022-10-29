@@ -1,0 +1,62 @@
+[
+    {
+        "customerId": 1,
+        "orderTotal": 13.00,
+        "loyaltyPoints": 0,
+        "orderCount": 0
+    },
+    {
+        "customerId": 2,
+        "orderTotal": 56.00,
+        "loyaltyPoints": 0,
+        "orderCount": 0
+    },
+    {
+        "customerId": 3,
+        "orderTotal": 22.00,
+        "loyaltyPoints": 0,
+        "orderCount": 0
+    },
+    {
+        "customerId": 4,
+        "orderTotal": 107.00,
+        "loyaltyPoints": 0,
+        "orderCount": 0
+    },
+    {
+        "customerId": 5,
+        "orderTotal": 89.00,
+        "loyaltyPoints": 0,
+        "orderCount": 0
+    },
+    {
+        "customerId": 6,
+        "orderTotal": 17.00,
+        "loyaltyPoints": 0,
+        "orderCount": 0
+    },
+    {
+        "customerId": 7,
+        "orderTotal": 168.00,
+        "loyaltyPoints": 0,
+        "orderCount": 0
+    },
+    {
+        "customerId": 8,
+        "orderTotal": 158.00,
+        "loyaltyPoints": 0,
+        "orderCount": 0
+    },
+    {
+        "customerId": 9,
+        "orderTotal": 74.00,
+        "loyaltyPoints": 0,
+        "orderCount": 0
+    },
+    {
+        "customerId": 10,
+        "orderTotal": 72.00,
+        "loyaltyPoints": 0,
+        "orderCount": 0
+    }
+]

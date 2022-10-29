@@ -1,0 +1,17 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: loyalty-lock
+  namespace: dapr-resiliency
+spec:
+  type: lock.redis
+  version: v1
+  metadata:
+  - name: redisHost
+    value: redis-master.redis.svc.cluster.local:6379
+  - name: redisPassword
+    secretKeyRef:    
+      name: redis-password
+      key: redis-password
+scopes:
+  - customer-loyalty-job

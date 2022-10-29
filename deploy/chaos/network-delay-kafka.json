@@ -1,0 +1,28 @@
+{
+   "action": "delay",
+   "mode": "one",
+   "selector": {
+      "namespaces": [
+         "dapr-resiliency"
+      ],
+      "labelSelectors": {
+         "app": "customer-order-service"
+      }
+   },
+   "direction": "from",
+   "target": {
+      "mode": "all",
+      "selector": {
+         "namespaces": [
+            "kafka"
+         ],
+         "labelSelectors": {
+            "app.kubernetes.io/component": "kafka"
+         }
+      }
+   },
+   "delay": {
+      "latency": "6000ms",
+      "jitter": "2000ms"
+   }
+}

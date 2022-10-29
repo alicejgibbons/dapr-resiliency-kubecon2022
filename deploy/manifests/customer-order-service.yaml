@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-order-service
+  namespace: dapr-resiliency
+  labels:
+    app: customer-order-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customer-order-service
+  template:
+    metadata:
+      labels:
+        app: customer-order-service
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "customer-order-service"
+        dapr.io/app-port: "80"
+        dapr.io/config: "config"
+        dapr.io/enable-api-logging: "true"
+    spec:
+      containers:
+        - name: customer-order-service
+          image: "acrkubecon2022.azurecr.io/dapr-resiliency/customer-order-service:1.0"
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "200m"
+            limits:
+              memory: "512Mi"
+              cpu: "1"
+          ports:
+            - containerPort: 80
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: customer-order-service
+  namespace: dapr-resiliency
+  labels:
+    name: customer-order-service
+spec:
+  selector:
+    app: customer-order-service
+  type: LoadBalancer
+  ports:
+   - port: 80
+     name: http
+     targetPort: 80
+     protocol: TCP
+---     

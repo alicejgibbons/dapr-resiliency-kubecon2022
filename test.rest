@@ -1,0 +1,24 @@
+# Local test config
+# Test Publisher (non-daprized)
+POST http://localhost:4000/order HTTP/1.1
+content-type: application/json
+ 
+{
+    "customerId": "17",
+    "orderTotal": "10.50",
+    "loyaltyPoints": "0"
+}
+
+### 
+# Test front end
+GET http://localhost:8080
+
+###
+# AKS Test config
+# Test frontend (DAPR)
+GET http://20.241.230.182
+
+###
+# Test frontend (NON-DAPR)
+GET http://20.241.230.65
+

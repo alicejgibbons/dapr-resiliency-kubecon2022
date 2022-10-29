@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "CustomerLoyaltyJob": {
+      "commandName": "Project",
+      "applicationUrl": "http://localhost:8000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://*:8000",
+        "DAPR_HTTP_PORT": "8100",
+        "DAPR_GRPC_PORT": "8101"
+      }
+    }
+  }
+}

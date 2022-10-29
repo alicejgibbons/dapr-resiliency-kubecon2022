@@ -1,0 +1,34 @@
+apiVersion: dapr.io/v1alpha1
+kind: Resiliency
+metadata:
+  name: resiliency-policies
+  namespace: dapr-resiliency
+spec:
+  policies:
+    timeouts:
+      general: 5000ms   
+    retries:      
+      retryForever:
+        policy: constant
+        duration: 200ms
+        maxRetries: -1
+    circuitBreakers: 
+      general:
+        maxRequests: 1
+        interval: 0s
+        timeout: 60s
+        trip: consecutiveFailures > 10
+  targets:
+    apps:
+      customer-order-service:
+        retry: retryForever
+        timeout: general
+    components: 
+      order-queue:
+        outbound: 
+         retry: retryForever
+         timeout: general
+         circuitBreaker: general
+scopes: 
+- "frontend-dapr"
+- "customer-order-service"

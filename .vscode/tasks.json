@@ -1,0 +1,263 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Build Customer Order Service",
+        "command": "dotnet",
+        "type": "process",
+        "args": [
+          "build",
+          "${workspaceFolder}/CustomerOrderService",
+          "/property:GenerateFullPaths=true",
+          "/consoleloggerparameters:NoSummary"
+        ],
+        "problemMatcher": "$msCompile",
+        "group": "build",
+        "presentation": {
+          "panel": "new",
+          "close": true
+        }
+      },
+      {
+        "label": "Build Customer Audit Service",
+        "command": "dotnet",
+        "type": "process",
+        "args": [
+          "build",
+          "${workspaceFolder}/CustomerAuditService",
+          "/property:GenerateFullPaths=true",
+          "/consoleloggerparameters:NoSummary"
+        ],
+        "problemMatcher": "$msCompile",
+        "group": "build",
+        "presentation": {
+          "panel": "new",
+          "close": true
+        }
+      },
+      {
+        "label": "Build Customer Loyalty Job",
+        "command": "dotnet",
+        "type": "process",
+        "args": [
+          "build",
+          "${workspaceFolder}/CustomerLoyaltyJob",
+          "/property:GenerateFullPaths=true",
+          "/consoleloggerparameters:NoSummary"
+        ],
+        "problemMatcher": "$msCompile",
+        "group": "build",
+        "presentation": {
+          "panel": "new",
+          "close": true
+        }
+      },
+      {
+        "label": "Build Customer Loyalty Job (no lock)",
+        "command": "dotnet",
+        "type": "process",
+        "args": [
+          "build",
+          "${workspaceFolder}/CustomerLoyaltyJobNoLock",
+          "/property:GenerateFullPaths=true",
+          "/consoleloggerparameters:NoSummary"
+        ],
+        "problemMatcher": "$msCompile",
+        "group": "build",
+        "presentation": {
+          "panel": "new",
+          "close": true
+        }
+      },
+      {
+        "label": "order-dapr-up",
+        "command": "dapr",
+        "args": [
+          "run",
+          "--app-id",
+          "customer-order-service",
+          "--components-path",
+          "${workspaceFolder}/components/local",
+          "--dapr-grpc-port",
+          "4101",
+          "--dapr-http-port",
+          "4100",
+          "--app-port",
+          "4000"
+        ],
+        "isBackground": true,
+        "presentation": {
+          "panel": "new",
+          // "group": "dapr-output",
+          "close": false
+        },
+        "dependsOn": ["Build Customer Order Service"],
+        "problemMatcher": {
+          "pattern": [
+            {
+              "regexp": ".",
+              "file": 1,
+              "location": 2,
+              "message": 3
+            }
+          ],
+          "background": {
+            "beginsPattern": "^.*Starting Dapr with id.*",
+            "endsPattern": "^.*up and running.*"
+          }
+        }
+      },
+      {
+        "label": "order-dapr-down",
+        "command": "dapr",
+        "args": ["stop", "--app-id", "customer-order-service"],
+        "problemMatcher": [],
+        "presentation": {
+          "panel": "new",
+          "close": true
+        }
+      },
+      {
+        "label": "loyalty-dapr-up",
+        "command": "dapr",
+        "args": [
+          "run",
+          "--app-id",
+          "customer-loyalty-job",
+          "--components-path",
+          "${workspaceFolder}/components/local",
+          "--dapr-grpc-port",
+          "8101",
+          "--dapr-http-port",
+          "8100",
+          "--app-port",
+          "8000"
+        ],
+        "isBackground": true,
+        "presentation": {
+          "panel": "new",
+          // "group": "dapr-output",
+          "close": false
+        },
+        "dependsOn": ["Build Customer Loyalty Job"],
+        "problemMatcher": {
+          "pattern": [
+            {
+              "regexp": ".",
+              "file": 1,
+              "location": 2,
+              "message": 3
+            }
+          ],
+          "background": {
+            "beginsPattern": "^.*Starting Dapr with id.*",
+            "endsPattern": "^.*up and running.*"
+          }
+        }
+      },
+      {
+        "label": "loyalty-dapr-down",
+        "command": "dapr",
+        "args": ["stop", "--app-id", "customer-loyalty-job"],
+        "problemMatcher": [],
+        "presentation": {
+          "close": true
+        }
+      },
+      {
+        "label": "loyalty-dapr-up-nolock",
+        "command": "dapr",
+        "args": [
+          "run",
+          "--app-id",
+          "customer-loyalty-job-nolock",
+          "--components-path",
+          "${workspaceFolder}/components/local",
+          "--dapr-grpc-port",
+          "9101",
+          "--dapr-http-port",
+          "9100",
+          "--app-port",
+          "9000"
+        ],
+        "isBackground": true,
+        "presentation": {
+          "panel": "new",
+          // "group": "dapr-output",
+          "close": false
+        },
+        "dependsOn": ["Build Customer Loyalty Job (no lock)"],
+        "problemMatcher": {
+          "pattern": [
+            {
+              "regexp": ".",
+              "file": 1,
+              "location": 2,
+              "message": 3
+            }
+          ],
+          "background": {
+            "beginsPattern": "^.*Starting Dapr with id.*",
+            "endsPattern": "^.*up and running.*"
+          }
+        }
+      },
+      {
+        "label": "loyalty-dapr-down-nolock",
+        "command": "dapr",
+        "args": ["stop", "--app-id", "customer-loyalty-job-nolock"],
+        "problemMatcher": [],
+        "presentation": {
+          "close": true
+        }
+      },
+      {
+        "label": "audit-dapr-up",
+        "command": "dapr",
+        "args": [
+          "run",
+          "--app-id",
+          "customer-audit-service",
+          "--components-path",
+          "${workspaceFolder}/components/local",
+          "--dapr-grpc-port",
+          "6101",
+          "--dapr-http-port",
+          "6100",
+          "--app-port",
+          "6000"
+        ],
+        "isBackground": true,
+        "presentation": {
+          "panel": "new",
+          // "group": "dapr-output",
+          "close": false
+        },
+        "dependsOn": ["Build Customer Audit Service"],
+        "problemMatcher": {
+          "pattern": [
+            {
+              "regexp": ".",
+              "file": 1,
+              "location": 2,
+              "message": 3
+            }
+          ],
+          "background": {
+            "beginsPattern": "^.*Starting Dapr with id.*",
+            "endsPattern": "^.*up and running.*"
+          }
+        }   
+      },
+      {
+        "label": "audit-dapr-down",
+        "command": "dapr",
+        "args": ["stop", "--app-id", "customer-audit-service"],
+        "problemMatcher": [],
+        "presentation": {
+          "close": true
+        }
+      },
+    ]
+  }
+  

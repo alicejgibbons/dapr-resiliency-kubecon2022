@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-loyalty-job-nolock
+  namespace: dapr-resiliency
+  labels:
+    app: customer-loyalty-job-nolock
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: customer-loyalty-job-nolock
+  template:
+    metadata:
+      labels:
+        app: customer-loyalty-job-nolock
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "customer-loyalty-job-nolock"
+        dapr.io/app-port: "80"
+        dapr.io/config: "config"
+    spec:
+      containers:
+        - name: customer-loyalty-job-nolock
+          image: "acrkubecon2022.azurecr.io/dapr-resiliency/customer-loyalty-job-nolock:1.0"
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "200m"
+            limits:
+              memory: "512Mi"
+              cpu: "1"
+          ports:
+            - containerPort: 80
+          imagePullPolicy: Always

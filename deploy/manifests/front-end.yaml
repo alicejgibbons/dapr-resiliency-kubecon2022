@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: dapr-resiliency
+  labels:
+    app: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: "acrkubecon2022.azurecr.io/dapr-resiliency/frontend:1.0"
+          env:
+            - name: "TARGETURL"
+              value: "http://customer-order-service/order"
+            - name: "INSTANCENAME"
+              value: "frontend"
+            - name: "PORT"
+              value: "80"
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "200m"
+            limits:
+              memory: "512Mi"
+              cpu: "1"
+          ports:
+            - containerPort: 80
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: dapr-resiliency
+  labels:
+    name: frontend
+spec:
+  selector:
+    app: frontend
+  type: LoadBalancer
+  ports:
+   - port: 80
+     name: http
+     targetPort: 80
+     protocol: TCP
+---     
