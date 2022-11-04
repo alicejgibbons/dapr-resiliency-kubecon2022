@@ -5,7 +5,6 @@ const rp = require('request-promise');
 
 var ORDER_COUNTER = 0;
 
-// var timeout = parseInt(process.env.TIMEOUT);
 var port = process.env.PORT || 8080;
 var targetURL = process.env.TARGETURL
 var instanceName = process.env.INSTANCENAME;
@@ -20,7 +19,6 @@ app.get('/', function (req, res) {
     headers: {
       "Content-Type": "application/json"
     },
-    // timeout: timeout,
     resolveWithFullResponse: true,
     json: true,
     body: customerOrders[ORDER_COUNTER % 10]
@@ -29,7 +27,6 @@ app.get('/', function (req, res) {
   console.log("Sending order to " + targetURL + " with orderID: " + customerOrders[ORDER_COUNTER % 10].customerId);
 
   /// post backend as specified in env var
-  /// expect answer in timeout as specified in
   /// otherwise return 500
   rp.post(targetURL, o)
     .then(function (data) {
